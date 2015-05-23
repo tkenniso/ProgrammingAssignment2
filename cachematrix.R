@@ -1,15 +1,10 @@
-## Author: Travis Kennison
-## Course: R Programming (rprog-014)
-
-##### The following pair of functions cache the inverse of a matrix 
+##### The following pair of functions caches the inverse of a matrix 
 ##### in order to avoid repeated, costly computations
 
-## 1.   set the value of the matrix
-## 2.   get the value of the matrix
-## 3.   set the value of the inverse
-## 4.   get the value of the inverse
 
-## Create special matrix object that can cache its inverse
+## The following function creates a list of functions and stores them in a special
+## matrix object that can used to return and cache the inverse of that matrix
+
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
         set <- function(y) {
@@ -25,7 +20,7 @@ makeCacheMatrix <- function(x = matrix()) {
         getinverse <- function() {
                 m
         }
-        list(set = set, get = get, setinverse = setinverse, getinverse = getinverse) # Return matrix type list of functions
+        list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
 }
 
 ## The following function calculates the inverse matrix
