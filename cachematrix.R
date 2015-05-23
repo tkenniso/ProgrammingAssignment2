@@ -1,15 +1,48 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Author: Travis Kennison
+## Course: R Programming (rprog-014)
 
-## Write a short comment describing this function
+##### The following pair of functions cache the inverse of a matrix 
+##### in order to avoid repeated, costly computations
 
+## 1.   set the value of the matrix
+## 2.   get the value of the matrix
+## 3.   set the value of the inverse
+## 4.   get the value of the inverse
+
+## Create special matrix object that can cache its inverse
 makeCacheMatrix <- function(x = matrix()) {
-
+        m <- NULL
+        set <- function(y) {
+                x <<- y
+                m <<- NULL
+        }
+        get <- function() {
+                x 
+        }               
+        setinverse <- function(solve) {
+                m <<- solve 
+        }
+        getinverse <- function() {
+                m
+        }
+        list(set = set, get = get, setinverse = setinverse, getinverse = getinverse) # Return matrix type list of functions
 }
 
-
-## Write a short comment describing this function
+## The following function calculates the inverse matrix
+## created from the above function. However, it first checks to see if the
+## inverse has already been calculated. If so, it gets the inverse from the
+## cache and skips the computation. Otherwise, it caclulates the inverse of
+## the data and sets the value of the inverse in the cache via the 'setinverse'
+## function
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        m <- x$getinverse()
+        if(!is.null(m)) {                       # if the inverse was cached -
+                message("getting cached data")
+                return(m)                       # exit program without executing subsequent code
+        }
+        data <- x$get()                         # otherwise, assign matrix to 'data'
+        m <- solve(data, ...)                 # compute the inverse of the matrix
+        x$setinverse(m)                       # call function to cache the matrix
+        m
 }
